@@ -25,7 +25,13 @@ def yeet():
     total_kills = 0
     if request.method == 'POST':
         total_kills = float(request.form['kills'])
-    return handsup(total_kills)
+    return redirect(url_for("num_kills", eliminations=total_kills))
+
+@app.route('/num_kills/<int:eliminations>')
+def num_kills(eliminations):
+    if eliminations>=20:
+        return render_template('result.html', status="GIGACHAD")
+    return render_template('result.html', status='SOYCHAMP')
 
 if __name__=='__main__':
     app.run(port=5000, debug=True)
